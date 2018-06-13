@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_ldap_installer_form_view" model="ir.ui.view">
+            <field name="model">res.company.ldap</field>
+            <field name="inherit_id" ref="auth_ldap.view_ldap_installer_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_user']" position="after">
+                    <field name="create_ldap_entry" />
+                </xpath>
+                <xpath expr="//form" position="inside">
+                    <group name="users_ldap_push" attrs="{'invisible': [('create_ldap_entry', '!=', True)]}">
+                        <field name="create_ldap_entry_base" />
+                        <field name="create_ldap_entry_objectclass" attrs="{'required': [('create_ldap_entry', '=', True)]}"/>
+                        <field name="create_ldap_entry_field_mappings" attrs="{'required': [('create_ldap_entry', '=', True)]}">
+                            <tree editable="bottom">
+                                <field name="field_id" />
+                                <field name="attribute" />
+                                <field name="use_for_dn" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
